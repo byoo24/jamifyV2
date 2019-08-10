@@ -1,6 +1,5 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-// const { buildSchema } = require('graphql');
 const { schema, rootValue } = require('./graphQL/graphQL');
 
 const app = express();
@@ -8,7 +7,7 @@ const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 const passport = require('passport');
 
-const User = require('./models/User');
+
 
 
 mongoose
@@ -16,9 +15,10 @@ mongoose
     .then(() => console.log('Connected to MonogoDB successfully.'))
     .catch(err => console.log(err));
 
+
 // Body Parser Middleware
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.use(passport.initialize());
 
@@ -32,7 +32,7 @@ app.use('/api/users', require('./routes/api/users'));
 app.use('/graphql', graphqlHTTP({
     schema,
     rootValue,
-    graphiql: true
+    graphiql: process.env.NODE_ENV === 'development'
 }));
 
 

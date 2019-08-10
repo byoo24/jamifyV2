@@ -1,14 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// const {
-//     GraphQLID,
-//     GraphQLString,
-//     GraphQLList,
-//     GraphQLNonNull,
-//     GraphQLObjectType,
-//     GraphQLSchema
-// } = require('graphql');
 
 const UserSchema = new Schema({
     handle: {
@@ -23,9 +15,13 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    date: {
-        type: Date,
-        default: Date.now
+    role: {
+        type: String,
+        default: 'student'
+    },
+    coach: {
+        type: String,
+        default: null
     },
 });
 const User = mongoose.model('users', UserSchema);

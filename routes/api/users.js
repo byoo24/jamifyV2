@@ -39,7 +39,7 @@ router.post('/register', (req, res) => {
                     newUser
                         .save()
                         .then(user => {
-                            const payload = { id: user.id, name: user.name };
+                            const payload = { id: user.id, handle: user.handle };
 
                             jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
                                 res.json({
@@ -68,7 +68,7 @@ router.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    User.findOne({ handle }).then(user => {
+    User.findOne({ handle: req.body.handle }).then(user => {
         if (!user) {
             errors.name = "This user does not exist";
             return res.status(404).json(errors);

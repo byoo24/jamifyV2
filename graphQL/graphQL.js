@@ -10,6 +10,8 @@ const schema = buildSchema(`
         handle: String!
         email: String!
         password: String!
+        role: String
+        coach: String
     }
     input UserInput {
         handle: String!
@@ -47,7 +49,6 @@ const rootValue = {
             handle: args.userInput.handle,
             email: args.userInput.email,
             password: args.userInput.password,
-            date: args.userInput.date,
         });
 
         return user.save()
