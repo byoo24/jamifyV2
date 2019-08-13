@@ -3,7 +3,15 @@ const Schema = mongoose.Schema;
 
 
 const UserSchema = new Schema({
-    handle: {
+    username: {
+        type: String,
+        required: true,
+    },
+    firstName: {
+        type: String,
+        required: true,
+    },
+    lastName: {
         type: String,
         required: true,
     },
@@ -26,17 +34,6 @@ const UserSchema = new Schema({
 });
 const User = mongoose.model('users', UserSchema);
 
-
-// const UserType = new GraphQlObjectType({
-//     name: 'User',
-//     fields: {
-//         id: { type: GraphQLID },
-//         handle: { type: GraphQLString },
-//         email: { type: GraphQLString },
-//         password: { type: GraphQLString },
-//         date: { type: GraphQLString }
-//     }
-// })
 
 
 module.exports = User;

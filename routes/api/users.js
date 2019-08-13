@@ -20,14 +20,16 @@ router.post('/register', (req, res) => {
     }
 
     // Check to make sure nobody has already registered with a duplicate email
-    User.findOne({ handle: req.body.handle }).then(user => {
+    User.findOne({ username: req.body.username }).then(user => {
         if (user) {
-            errors.handle = "User already exists";
+            errors.username = "User already exists";
             return res.status(400).json(errors);
         } else {
             // Otherwise create a new user
             const newUser = new User({
-                handle: req.body.handle,
+                username: req.body.username,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
                 email: req.body.email,
                 password: req.body.password
             });
@@ -39,7 +41,7 @@ router.post('/register', (req, res) => {
                     newUser
                         .save()
                         .then(user => {
-                            const payload = { id: user.id, handle: user.handle };
+                            const payload = { id: user.id, username: user.username };
 
                             jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
                                 res.json({
@@ -65,12 +67,12 @@ router.post('/login', (req, res) => {
         return res.status(400).json(errors);
     }
 
-    const email = req.body.email;
+    const username = req.body.username;
     const password = req.body.password;
 
-    User.findOne({ handle: req.body.handle }).then(user => {
+    User.findOne({ username }).then(user => {
         if (!user) {
-            errors.name = "This user does not exist";
+            errors.username = "This user does not exist";
             return res.status(404).json(errors);
         }
 
@@ -78,8 +80,9 @@ router.post('/login', (req, res) => {
             if (isMatch) {
                 const payload = {
                     id: user.id,
-                    handle: user.handle,
-                    email: user.email
+                    username: user.username,
+                    email: user.email,
+                    role: user.role
                 }
                 jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
                     res.json({
@@ -101,8 +104,11 @@ router.post('/login', (req, res) => {
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.json({
         id: req.user.id,
-        handle: req.user.handle,
-        email: req.user.email
+        username: req.user.username,
+        email: req.user.email,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+        role: req.user.role
     });
 })
 

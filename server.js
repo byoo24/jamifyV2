@@ -1,6 +1,4 @@
 const express = require('express');
-const graphqlHTTP = require('express-graphql');
-const { schema, rootValue } = require('./graphQL/graphQL');
 
 const app = express();
 const mongoose = require('mongoose');
@@ -26,14 +24,6 @@ app.use(passport.initialize());
 // Routes
 app.use('/api/users', require('./routes/api/users'));
 
-
-
-
-app.use('/graphql', graphqlHTTP({
-    schema,
-    rootValue,
-    graphiql: process.env.NODE_ENV === 'development'
-}));
 
 
 const PORT = process.env.PORT || 5000;
