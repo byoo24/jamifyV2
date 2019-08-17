@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Redirect, withRouter } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
-const Auth = ({ component: Component, path, loggedIn, exact }) => (
+export const Auth = ({ component: Component, path, loggedIn, exact }) => (
     <Route path={path} exact={exact} render={(props) => (
         !loggedIn ? (
             <Component {...props} />
@@ -13,11 +13,11 @@ const Auth = ({ component: Component, path, loggedIn, exact }) => (
 );
 
 
-const Protected = ({ component: Component, loggedIn, ...rest }) => (
+export const Protected = ({ component: Component, loggedIn, ...rest }) => (
     <Route 
         {...rest}
         render={props => loggedIn ? (
-            <Component {...props} />
+            <Component {...props} loggedIn={loggedIn} />
         ) : (
             <Redirect to="/login" />
         )} 
@@ -25,11 +25,13 @@ const Protected = ({ component: Component, loggedIn, ...rest }) => (
 );
 
 
-// Use the isAuthenticated slice of state to determine whether a user is logged in
-const mapStateToProps = state => (
-    { loggedIn: state.session.isAuthenticated }
-)
 
 
-export const AuthRoute = withRouter(connect(mapStateToProps)(Auth));
-export const ProtectedRoute = withRouter(connect(mapStateToProps)(Protected));
+const msp = (state) => {
+    return {
+        loggedIn: state.session.isAuthenticated
+    }
+};
+
+export const AuthRoute = connect(msp)(Auth);
+export const ProtectedRoute = connect(msp)(Protected);

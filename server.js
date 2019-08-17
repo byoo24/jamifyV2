@@ -22,6 +22,9 @@ app.use(passport.initialize());
 
 
 // Routes
+app.get('/', (req, res) => {
+    res.send('root');
+});
 app.use('/api/users', require('./routes/api/users'));
 
 

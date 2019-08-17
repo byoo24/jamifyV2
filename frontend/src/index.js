@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/sessionApiUtil';
 import { logout } from './actions/sessionActions';
 
-import './scss/style.scss';
+import './sass/style.scss';
 
 import Root from './components/Root';
 
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
     ReactDOM.render(<Root store={store} />, root);
 
-
+    // Testing
     window.store = store;
 })
 

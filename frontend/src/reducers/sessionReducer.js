@@ -4,6 +4,7 @@ import {
     RECEIVE_USER_SIGN_IN
 } from '../actions/sessionActions';
 
+
 const initialState = {
     isAuthenticated: false,
     user: {}

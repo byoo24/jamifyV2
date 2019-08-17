@@ -1,0 +1,105 @@
+$transitionTime: 0.35s;
+
+.nav_main {
+    display: block;
+    position: absolute;
+    height: 4em;
+    width: 100%;
+    color: _palette(nav, color);
+    background-color: _palette(nav, bg);
+    transition: height $transitionTime linear;
+
+
+    .nav_main-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        height: 4em;
+        margin: 0 auto;
+
+        .nav_main-left {
+            .nav_main-desktop {
+                display: none;
+            }
+        }
+
+        .nav_main-right {
+
+            .hamburgerToggle {
+                display: block;
+                position: relative;
+                height: 30px;
+                width: 30px;
+
+                span {
+                    display: block;
+                    position: absolute;
+                    height: 0.5px;
+                    width: 100%;
+                    background: #f2f2f2;
+                    border-radius: 5px;
+                    margin-top: 3px;
+                    opacity: 1;
+                    transform: rotate(0deg);
+                    transition: all 0.2s;
+                }
+
+                $increment: 0;
+                @for $i from 1 through 3 {
+                    span:nth-child(#{$i}) {
+                        top: #{$increment}px;
+                        $increment: $increment + 10;
+                    }
+                }
+
+            }
+
+            .session {
+                display: none;
+            }
+        }
+
+    }
+
+
+    
+    .nav_mobile-container {
+        display: block;
+        position: fixed;
+        top: 0; 
+        right: 0; 
+        bottom: 0; 
+        left: 0;
+        
+        .nav_mobile-list {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding-top: 2em;
+            background-color: _palette(nav, bg);
+            visibility: hidden;
+            opacity: 0;
+            transition-property: visibility, opacity;
+            transition-duration: $transitionTime;
+            transition-timing-function: ease;
+    
+            &.mobile-active {
+                visibility: visible;
+                opacity: 1;
+            }
+    
+            li {
+                display: block;
+                margin: 0 auto;
+                width: 90%;
+                line-height: 5em;
+            }
+        }
+
+    }
+
+
+} //.nav_header
+
+

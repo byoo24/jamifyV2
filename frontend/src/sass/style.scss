@@ -1,7 +1,6 @@
-
-
-
-
+@import './libs/vars';
+@import './libs/functions';
+@import './libs/mixins';
 
 // Breakpoints. 
 
@@ -85,4 +84,15 @@
 	}
 
 
+// Global Settings
+	body {
+		font-size: 16px;
+		font-size: 1rem;
+		font-family: _font(family);
+		font-weight: _font(normal);
+		// font-weight: val($font, bold);
 
+	}
+
+
+	@import './navbar/nav_main.scss';

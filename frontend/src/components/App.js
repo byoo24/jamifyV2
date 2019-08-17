@@ -1,37 +1,29 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../util/routeUtil';
 
 import Home from './static/Home';
-import Login from './static/Login';
-import Register from './static/Register';
-import Dashboard from './Dashboard';
+import Login from './session/Login';
+import Register from './session/Register';
+import Dashboard from './dashboard/Dashboard';
 
 
 export const App = (props) => {
-    const { loggedIn } = props;    
     
     return (
         <>
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <AuthRoute exact path="/login" loggedIn={loggedIn} component={Login} />
-                <AuthRoute exact path="/register" loggedIn={loggedIn} component={Register} />
-                <ProtectedRoute path="/dashboard" loggedIn={loggedIn} component={Dashboard} />
-            </Switch>
+        <Switch>
+            <Route exact path="/" component={Home} />
+            <AuthRoute exact path="/login" component={Login} />
+            <AuthRoute exact path="/register" component={Register} />
+            <ProtectedRoute path="/dashboard" component={Dashboard} />
+        </Switch>
         </>
     );
 }
 
-// export default App;
-
-const msp = (state) => {
-    console.log(state);
-    return {
-        loggedIn: !!state.session.user
-    }
-};
 
 
-export default connect(msp)(App);
+
+
+export default App;
