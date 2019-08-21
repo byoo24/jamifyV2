@@ -2,16 +2,6 @@
 @import './libs/functions';
 @import './libs/mixins';
 
-// Breakpoints. 
-
-	// @include breakpoints((
-	// 	xl:     ( 1281px,  1680px ),
-	// 	lg:     ( 981px,   1280px ),
-	// 	md:     ( 737px,   980px  ),
-	// 	sm:     ( 481px,   736px  ),
-	// 	xs:     ( null,    480px  ),
-	// ));
-
 // Reset.
 // Based on meyerweb.com/eric/tools/css/reset (v2.0 | 20110126 | License: public domain)
 
@@ -90,9 +80,11 @@
 		font-size: 1rem;
 		font-family: _font(family);
 		font-weight: _font(normal);
+		background: #f2f2f2;
 		// font-weight: val($font, bold);
 
 	}
 
 
 	@import './navbar/nav_main.scss';
+	@import './ui/panels.scss';

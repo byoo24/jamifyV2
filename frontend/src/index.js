@@ -10,9 +10,6 @@ import './sass/style.scss';
 
 import Root from './components/Root';
 
-// Testing
-import axios from 'axios';
-import {login} from './actions/sessionActions';
 
 
 
@@ -38,31 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         store = configureStore(preloadedState);
-
         const currentTime = Date.now() / 1000;
 
         if (decodedUser.exp < currentTime) {
             store.dispatch(logout());
             window.location.href = '/login';
         }
-
     } else {
         store = configureStore({});
     }
 
     const root = document.getElementById('root');
     ReactDOM.render(<Root store={store} />, root);
-
-    // Testing
-    window.store = store;
 })
 
 
 
 
 
-
-// Testing
-window.axios = axios;
-window.login = login;
-window.logout = logout;

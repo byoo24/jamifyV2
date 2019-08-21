@@ -31,6 +31,34 @@ const UserSchema = new Schema({
         type: String,
         default: null
     },
+    foundations: {
+        resume: {
+            type: Integer,
+            default: 0
+        },
+        cover_letter: {
+            type: Integer,
+            default: 0
+        },
+        full_stack_project: {
+            type: Integer,
+            default: 0
+        },
+        javascript_project: {
+            type: Integer,
+            default: 0
+        },
+        personal_pitch: {
+            type: Integer,
+            default: 0
+        },
+        mock_interview: {
+            type: Integer,
+            default: 0
+        },
+        
+        
+    }
 });
 const User = mongoose.model('users', UserSchema);
 

@@ -1,8 +1,9 @@
 $transitionTime: 0.35s;
+$desktopSize: _screenSize(large);
 
 .nav_main {
     display: block;
-    position: absolute;
+    position: relative;
     height: 4em;
     width: 100%;
     color: _palette(nav, color);
@@ -19,75 +20,60 @@ $transitionTime: 0.35s;
         margin: 0 auto;
 
         .nav_main-left {
+            display: flex;
+            align-items: center;
+
             .nav_main-desktop {
                 display: none;
+                margin-left: 1.5em;
+
+                @media screen and (min-width: $desktopSize) {
+                    display: flex;
+
+                    li {
+                        display: block;
+                        padding: 0.5em 1em;
+                    }
+                }
             }
         }
 
         .nav_main-right {
-
-            .hamburgerToggle {
-                display: block;
-                position: relative;
-                height: 30px;
-                width: 30px;
-
-                span {
-                    display: block;
-                    position: absolute;
-                    height: 0.5px;
-                    width: 100%;
-                    background: #f2f2f2;
-                    border-radius: 5px;
-                    margin-top: 3px;
-                    opacity: 1;
-                    transform: rotate(0deg);
-                    transition: all 0.2s;
-                }
-
-                $increment: 0;
-                @for $i from 1 through 3 {
-                    span:nth-child(#{$i}) {
-                        top: #{$increment}px;
-                        $increment: $increment + 10;
-                    }
-                }
-
-            }
-
             .session {
                 display: none;
+
+                @media screen and (min-width: $desktopSize) {
+                    display: block;
+                }
             }
         }
+    } // .nav_main-container
 
-    }
-
-
-    
     .nav_mobile-container {
         display: block;
         position: fixed;
-        top: 0; 
-        right: 0; 
-        bottom: 0; 
-        left: 0;
-        
+        background-color: _palette(nav, bg);
+        height: 0%;
+        width: 0%;
+        visibility: hidden;
+        opacity: 0;
+        transition-property: visibility, opacity, width, height;
+        transition-duration: $transitionTime;
+        transition-timing-function: ease;
+
+        &.mobile-active {
+            visibility: visible;
+            opacity: 1;
+            height: 100%;
+            width: 100%;
+        }
+
         .nav_mobile-list {
             display: flex;
             justify-content: center;
             flex-direction: column;
             padding-top: 2em;
             background-color: _palette(nav, bg);
-            visibility: hidden;
-            opacity: 0;
-            transition-property: visibility, opacity;
-            transition-duration: $transitionTime;
-            transition-timing-function: ease;
-    
-            &.mobile-active {
-                visibility: visible;
-                opacity: 1;
-            }
     
             li {
                 display: block;
@@ -95,11 +81,63 @@ $transitionTime: 0.35s;
                 width: 90%;
                 line-height: 5em;
             }
-        }
+        } // .nav_mobile-list
 
+
+        @media screen and (min-width: $desktopSize) {
+            display: none;
+        }
+    } // .nav_mobile-container
+
+
+    
+} // .nav_main
+
+
+
+
+.hamburgerToggle {
+    display: block;
+    position: relative;
+    height: 30px;
+    width: 30px;
+
+    span {
+        display: block;
+        position: absolute;
+        height: 0.5px;
+        width: 100%;
+        background: #f2f2f2;
+        border-radius: 5px;
+        margin-top: 3px;
+        opacity: 1;
+        transform: rotate(0deg);
+        transition: all 0.2s;
     }
 
+    $increment: 0;
+    @for $i from 1 through 3 {
+        span:nth-child(#{$i}) {
+            top: #{$increment}px;
+            $increment: $increment + 10;
+        }
+    }
 
-} //.nav_header
+    &.mobile-active {
+        span {
+            &:nth-child(odd) {
+                transform: rotate(45deg);
+                top: 50%;
+            }
 
+            &:nth-child(even) {
+                transform: rotate(-45deg);
+                top: 50%;
+            }
+        }
+    } // &.mobile-active
 
+    @media screen and (min-width: $desktopSize) {
+        display: none;
+    }
+} // .hamburgerToggle

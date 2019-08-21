@@ -1,14 +1,26 @@
-import React, { useRef } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { openNavMobile, closeNavMobile } from '../../actions/uiActions';
 
 
-
+// const breakpoints = {
+//     xlarge: 1280,
+//     large: 980,
+//     medium: 736,
+//     small: 480
+// }
 
 
 const Navbar = (props) => {
     const { mobileNavOpen, openNavMobile, closeNavMobile } = props;
     let mobileActive = mobileNavOpen ? 'mobile-active' : '';
+
+    // useEffect(
+    //     () => {
+    //         closeNavMobile();
+    //     },
+    //     [window.innerWidth]
+    // )
 
     
     const mobileToggle = () => {
@@ -36,7 +48,8 @@ const Navbar = (props) => {
                     </div>
                     
                     <div className="nav_main-right">
-                        <div className="hamburgerToggle" onClick={mobileToggle}>
+                        <div className={`hamburgerToggle ${mobileActive}`} onClick={mobileToggle}>
+                            <span></span>
                             <span></span>
                             <span></span>
                             <span></span>
@@ -48,8 +61,9 @@ const Navbar = (props) => {
                 </nav>
 
 
-                <div className="nav_mobile-main">
-                    <ul className={`nav_mobile-list ${mobileActive}`}>
+                <div className={`nav_mobile-container ${mobileActive}`}>
+
+                    <ul className="nav_mobile-list">
                         <li className="nav_mobile_item">Dashboard</li>
                         <li className="nav_mobile_item">item 2</li>
                         <li className="nav_mobile_item">item 3</li>

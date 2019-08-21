@@ -7,6 +7,14 @@ $font: (
 );
 
 
+$breakpoints: (
+    xlarge:   1280px,
+    large:    980px,
+    medium:   736px,
+    small:    480px
+);
+
+
 $palette: (
     bg: #fff,
 
