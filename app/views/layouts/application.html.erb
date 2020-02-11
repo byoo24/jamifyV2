@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JamifyV2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <% if current_user %>
+      <script>
+        window.current_user = <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>;
+      </script>
+    <% end %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

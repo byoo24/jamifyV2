@@ -1,0 +1,18 @@
+# == Schema Information
+#
+# Table name: artists
+#
+#  id         :uuid             not null, primary key
+#  name       :string
+#  bio        :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+
+two:
+  name: MyString

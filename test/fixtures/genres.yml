@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: genres
+#
+#  id         :uuid             not null, primary key
+#  name       :string
+#  artist_ids :uuid             is an Array
+#  album_ids  :uuid             is an Array
+#  track_ids  :uuid             is an Array
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+
+two:
+  name: MyString
